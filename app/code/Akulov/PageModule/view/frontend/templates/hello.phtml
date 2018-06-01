@@ -1,0 +1,9 @@
+<?php
+/** @var \Akulov\PageModule\Block\Hello $block */
+?>
+
+<?php foreach ($block->getItems() as $item) : ?>
+    <p>
+        <?php var_dump($item->getData())?>
+<?php endforeach;?>
+
