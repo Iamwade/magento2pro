@@ -29,5 +29,5 @@ class Hello extends Template
         $collection->setPageSize(3); // fetching only 3 products
         return $collection;
     }
-    
+
 }
