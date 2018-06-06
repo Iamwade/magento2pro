@@ -1,16 +1,5 @@
-<style type="text/css">
-    .block1 {
-        width: 400px;
-        background: #ccc;
-        padding: 5px;
-        padding-right: 20px;
-        border: solid 1px black;
-        float: left;
-    }
-</style>
 <?php $productCollection = $block->getProductCollection(); ?>
 <?php $imageBlock =  $block->getLayout()->createBlock('Magento\Catalog\Block\Product\ListProduct'); ?>
-
 <?php if (count($productCollection)): ?>
     <?php foreach ($productCollection as $product): ?>
         <div class="block1">
