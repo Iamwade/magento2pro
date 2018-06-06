@@ -1,21 +1,23 @@
-<?php
-/** @var \Mastering\SampleModule\Block\Hello $block */
-?>
+<style type="text/css">
+    .block1 {
+        width: 400px;
+        background: #ccc;
+        padding: 5px;
+        padding-right: 20px;
+        border: solid 1px black;
+        float: left;
+    }
+</style>
+<?php $productCollection = $block->getProductCollection(); ?>
+<?php $imageBlock =  $block->getLayout()->createBlock('Magento\Catalog\Block\Product\ListProduct'); ?>
 
-<?php foreach ($block->getItems() as $item) : ?>
-    <p>
-        <?php echo $item->getName(); ?> : <?php echo $item->getId(); ?> : <?php echo $item->getPrice(); ?>
-        : <?php echo $item->getWeight(); ?>
-        : <?php echo $item->getImage(); ?>
-        : <?php echo $item->getImageUrl(); ?>
-        : <?php echo $item->getPrice(); ?>
-        :::::::::::::<?php echo $item->getData('meta_description'); ?>
-    </p>
-<?php endforeach;?>
-
-<?php foreach ($block->getItems() as $item) : ?>
-<p>
-    <?php var_dump($item->getData())?>
-    <?php endforeach;?>
-
-
+<?php if (count($productCollection)): ?>
+    <?php foreach ($productCollection as $product): ?>
+        <div class="block1">
+        <?php $productImage = $imageBlock->getImage($product, 'category_page_grid'); ?>
+        <h1>Product name : <?php echo $product->getName(); ?></h1>
+        <h1>Product price : <?php echo $product->getPrice(); ?></h1>
+        <a href="<?php /* @escapeNotVerified */ echo $product->getProductUrl() ?>" class="product photo product-item-photo" tabindex="-1"><?php echo $productImage->toHtml(); ?></a>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>

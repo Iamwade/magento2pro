@@ -2,32 +2,26 @@
 
 namespace Akulov\PageModule\Block;
 
-use Magento\Framework\View\Element\Template;
 
-class Hello extends Template
-{
-    private $_productCollectionFactory;
-    protected $_imageBuilder;
+class Hello extends \Magento\Framework\View\Element\Template {
 
     public function __construct(
-        \Magento\Backend\Block\Template\Context $context,
+        \Magento\Framework\View\Element\Template\Context $context,
         \Magento\Catalog\Model\ResourceModel\Product\CollectionFactory $productCollectionFactory,
-        \Magento\Catalog\Block\Product\ImageBuilder $_imageBuilder,
+        \Magento\Catalog\Model\Product\Visibility $catalogProductVisibility,
         array $data = []
-    )
-
-    {
+    ){
         $this->_productCollectionFactory = $productCollectionFactory;
-        $this->_imageBuilder=$_imageBuilder;
+        $this->_catalogProductVisibility = $catalogProductVisibility;
         parent::__construct($context, $data);
     }
 
-    public function getItems()
-    {
+    public function getProductCollection() {
         $collection = $this->_productCollectionFactory->create();
         $collection->addAttributeToSelect('*');
-        $collection->setPageSize(3); // fetching only 3 products
+        $collection->setVisibility($this->_catalogProductVisibility->getVisibleInCatalogIds());
+        $collection->addFieldToSelect('small_image');
+
         return $collection;
     }
-
 }
