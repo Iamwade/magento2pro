@@ -19,9 +19,6 @@ class Hello extends \Magento\Framework\View\Element\Template {
     public function getProductCollection() {
         $collection = $this->_productCollectionFactory->create();
         $collection->addAttributeToSelect('*');
-        $collection->setVisibility($this->_catalogProductVisibility->getVisibleInCatalogIds());
-        $collection->addFieldToSelect('small_image');
-
         return $collection;
     }
 }
